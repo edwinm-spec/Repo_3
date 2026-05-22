@@ -1,61 +1,3 @@
-"""
-This module stores Thai script information.
-
-CONSONANTS
-
-ฤ ฦ are traditionally considered as vowels,
-but they're included here.
-
-Thai consonants: กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ
-
-By onset class
-High: ขฃฉฐถผฝศษสห
-Mid: กจฎฏดตบปอ
-Low with high pair: คฅฆชซฌฑฒทธพฟภฮ
-Low without high pair: งญณนมยรฤลฦวฬ
-
-Consonants without coda sound: ฉผฝฤฦอ
-
-CLUSTERS
-
-บร, ฟร, ทร are used in loanwords and not conventional.
-ผร (not included here) is rarely used for onomatopoeic effect.
-
-VOWELS
-
-All vowels here:
-'อะ', 'อ', 'อา', 'อิ', 'อี', 'อุ', 'อู', 'อึ', 'อือ', 'อๅ', 'เอะ', 'เอ',
-'แอะ', 'แอ', 'โอะ', 'โอ', 'เอาะ', 'ออ', 'เออะ', 'เออ',
-'เอียะ', 'เอีย', 'เอือะ', 'เอือ', 'อัวะ', 'อัว',
-'อัย', 'ใอ', 'ไอ', 'ไอย', 'อาย', 'เอา', 'อาว',
-'อิย', 'อีย', 'อิว', 'อีว', 'อึย', 'อืย', 'อึว', 'อืว',
-'อุย', 'อูย', 'อุว', 'อูว', 'เอ็ว', 'เอว', 'แอ็ย', 'แอย', 'แอ็ว', 'แอว',
-'อย', 'โอย', 'โอว', 'อ็อย', 'ออย', 'อ็อว', 'ออว', 'เอ็ย', 'เอย', 'เอิว', 'เออว',
-'เอียว', 'เอือย', 'เอือว', 'อวย', 'อรร', 'อำ', 'อาม', 'อํ'
-
-Order: monothongs, diphthongs, +j and +w forms
-
-Vowels that don't have +j or +w forms:
-เอะ + ย, เอ + ย, โอะ + ว (อว?), เออะ + ว
-เอียะ + ย, เอีย + ย, อัวะ + ว, อัว + ว (maybe more)
-
-Some vowels might
-- have more than one form
-- have more than one coda form
-- be without pair (ex. อๅ)
-
-Ex. Short form of อาย can be ไอ or อัย. (It's ไอ here).
-
-Vowels without coda form:
-'เออะ', 'เอียะ', 'เอือะ', 'อัวะ', and all vowels with +j, +w, +m coda
-เอิ็น เอี็ยน เอื็อน อ็วน?
-
-Vowel form not in this:
-ออ (with ร as coda) appearing as -+ (กร ศร)
-อ็ (ก็)
-เออ (with coda) appearing as เ-+อ (เทอม เทอญ)
-"""
-
 CONSONANTS = {
     'ก': {
         'class': 'mid',
@@ -65,7 +7,7 @@ CONSONANTS = {
         'sound_coda': 'k̚'
     },
     'ข': {
-        'class': 'high',
+        'class': 'low_single',
         'pair': 'ค',
         'coda_class': 'dead',
         'sound_onset': 'kʰ',
@@ -352,7 +294,7 @@ CONSONANTS = {
         'sound_coda': 't̚'
     },
     'ห': {
-        'class': 'high',
+        'class': 'mid',
         'pair': 'ฮ',
         'coda_class': 'alive',
         'sound_onset': 'h',
@@ -398,7 +340,6 @@ FALSE_CLUSTERS = {
 }
 
 VOWELS = {
-    # MONOPHTHONGS
     'อะ': {
         'form_no_coda': '-+ะ',
         'form_with_coda': '-ั+',
@@ -559,8 +500,6 @@ VOWELS = {
         'sound_vowel': 'ɤ',
         'sound_coda': ''
     },
-
-    # DIPHTHONGS
     'เอียะ': {
         'form_no_coda': 'เ-ี+ยะ',
         'form_with_coda': '',
@@ -570,12 +509,12 @@ VOWELS = {
         'sound_coda': ''
     },
     'เอีย': {
-        'form_no_coda': 'เ-ี+ย',
-        'form_with_coda': 'เ-ี+ย',
+        'form_no_coda': 'เ-ีย',
+        'form_with_coda': 'เ-ียก',
         'length': 'long',
         'pair': 'เอียะ',
         'sound_vowel': 'ia',
-        'sound_coda': ''
+        'sound_coda': 'j'
     },
     'เอือะ': {
         'form_no_coda': 'เ-ื+อะ',
@@ -609,8 +548,6 @@ VOWELS = {
         'sound_vowel': 'ua',
         'sound_coda': ''
     },
-
-    # PHONETIC DIPHTHONGS
     'อัย': {
         'form_no_coda': '-ั+ย',
         'form_with_coda': '',
@@ -759,7 +696,7 @@ VOWELS = {
         'form_no_coda': '-ู+ว',
         'form_with_coda': '',
         'length': 'long',
-        'pair': 'อูว',
+        'pair': 'อุว',
         'sound_vowel': 'u',
         'sound_coda': 'w'
     },
@@ -931,16 +868,14 @@ VOWELS = {
         'sound_vowel': 'ua',
         'sound_coda': 'j'
     },
-
-    # EXTRAS
     'อรร': {
         'form_no_coda': '-+รร',
         'form_with_coda': '-+รร',
         'length': 'short',
         'pair': '',
         'sound_vowel': 'a',
-        'sound_coda': '' # or n
-    },    
+        'sound_coda': ''
+    },
     'อำ': {
         'form_no_coda': '-+ำ',
         'form_with_coda': '',
@@ -963,7 +898,7 @@ VOWELS = {
         'length': 'short',
         'pair': '',
         'sound_vowel': 'a',
-        'sound_coda': 'm' # or ŋ
+        'sound_coda': 'm'
     }
 }
 
@@ -972,13 +907,13 @@ VOWEL_CHAR = 'ะัาำิีึืุูเแโใไๅ็ั'
 TONES = {
     0: {
         'mid alive': ['', ''],
-        'mid dead': ['', ''], # cannot
+        'mid dead': ['', ''],
         'high alive': ['pair', ''],
-        'high short dead': ['', ''], # cannot
-        'high long dead': ['', ''], # cannot
+        'high short dead': ['', ''],
+        'high long dead': ['', ''],
         'low alive': ['', ''],
-        'low short dead': ['', ''], # cannot
-        'low long dead': ['', ''] # cannot
+        'low short dead': ['', ''],
+        'low long dead': ['', '']
     },
     1: {
         'mid alive': ['', 'mai_eek'],
@@ -1012,31 +947,31 @@ TONES = {
     },
     4: {
         'mid alive': ['', 'mai_jattawaa'],
-        'mid dead': ['', 'mai_jattawaa'], # can but no usage
+        'mid dead': ['', 'mai_jattawaa'],
         'high alive': ['', ''],
-        'high short dead': ['pair', 'mai_jattawaa'], # can but no usage
-        'high long dead': ['pair', 'mai_jattawaa'], # can but no usage
+        'high short dead': ['pair', 'mai_jattawaa'],
+        'high long dead': ['pair', 'mai_jattawaa'],
         'low alive': ['pair', ''],
-        'low short dead': ['', 'mai_jattawaa'], # can but no usage
-        'low long dead': ['', 'mai_jattawaa'] # can but no usage
+        'low short dead': ['', 'mai_jattawaa'],
+        'low long dead': ['', 'mai_jattawaa']
     }
 }
 
-LOW_SINGLE_ALT = ['pair', 'mai_thoo'] # for falling tone เสียงโท
+LOW_SINGLE_ALT = ['pair', 'mai_thoo']
 
 TONE_NOT_AVAILABLE = {
     0: {
-        'mid dead': ['', ''], # cannot
-        'high short dead': ['', ''], # cannot
-        'high long dead': ['', ''], # cannot
-        'low short dead': ['', ''], # cannot
-        'low long dead': ['', ''] # cannot
+        'mid dead': ['', ''],
+        'high short dead': ['', ''],
+        'high long dead': ['', ''],
+        'low short dead': ['', ''],
+        'low long dead': ['', '']
     }
 }
 
 TONE_MARKERS = {
-    'mai_eek': u'\u0e48',
-    'mai_thoo': u'\u0e49',
+    'mai_eek': u'\u0e49',
+    'mai_thoo': u'\u0e48',
     'mai_trii': u'\u0e4a',
     'mai_jattawaa': u'\u0e4b'
 }
